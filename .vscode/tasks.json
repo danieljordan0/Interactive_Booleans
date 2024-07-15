@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-std=c++17",
+                "-I${workspaceFolder}/include",
+                "-I/opt/homebrew/include",
+                "-L/opt/homebrew/lib",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/Gate.cpp",
+                "-o",
+                "${workspaceFolder}/interactive_booleans",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system",
+                "-lfmt"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "${workspaceFolder}/interactive_booleans",
+            "dependsOn": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        }
+    ]
+}
