@@ -8,17 +8,9 @@
 using namespace sf;
 
 enum class GateType {
-    AND_GATE,
-    OR_GATE,
-    NOT_GATE,
+    AND,
+    OR,
+    NOT,
 };
-
-struct Gate{
-    Texture texture;
-    Sprite sprite;
-    Vector2f position; 
-};
-
-bool createGate(GateType type, const std::string& textureFilePath, const Vector2f& gatePosition, std::unordered_map<GateType, Gate>& gates, std::vector<Sprite>& sprites);
 
 #endif

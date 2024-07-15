@@ -12,7 +12,6 @@
                 "-I/opt/homebrew/include",
                 "-L/opt/homebrew/lib",
                 "${workspaceFolder}/src/main.cpp",
-                "${workspaceFolder}/src/Gate.cpp",
                 "-o",
                 "${workspaceFolder}/interactive_booleans",
                 "-lsfml-graphics",

@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include "Gate.h"
+#include "AndGate.h"
 #include <spdlog/spdlog.h>
 #include <iostream>
 
@@ -16,23 +17,7 @@ int main() {
     // Set the background color
     Color bgColour(255, 255, 255);
 
-
-    std::vector<Sprite> sprites;
-
-    Texture texture;
-
-    if (!texture.loadFromFile("assets/images/gates/AND_gate.png"))
-    {
-        std::cerr << "Error loading image" << std::endl;
-        return -1;
-    }
-
-
-    Sprite sprite;
-    sprite.setTexture(texture);
-    sprite.setPosition(100, 100);
-
-    sprites.push_back(sprite);
+    AndGate andGate;
 
     // Variables to track dragging state
     bool isDragging = false;
@@ -51,7 +36,8 @@ int main() {
         window.clear(bgColour);
 
         // Ensure gates contain at least one entry
-        window.draw(sprites[0]);
+        window.draw(andGate.sprite);
+
 
         // Display the contents of the window
         window.display();
