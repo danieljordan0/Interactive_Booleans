@@ -1,43 +1,62 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
-#include <unordered_map>
-#include <string>
 #include "Gate.h"
 #include "AndGate.h"
+#include "Switch.h"
 #include <spdlog/spdlog.h>
 #include <iostream>
+#include <colors.h>
 
 using namespace sf;
 
-int main() {
-    // Create a window
-    RenderWindow window(VideoMode(1280, 832), "SFML Window");
+int main()
+{
 
-    // Set the background color
-    Color bgColour(255, 255, 255);
+    ContextSettings settings;
+    settings.antialiasingLevel = 8;
+    RenderWindow window(sf::VideoMode(1200, 800), "Boolean", Style::Default, settings);
 
     AndGate andGate;
 
-    // Variables to track dragging state
-    bool isDragging = false;
-    Vector2f offset;
+    SwitchComponent switchComponent("Switch 1", Vector2f(0, 200));
+    switchComponent.circle.setFillColor(blueColor);
+
 
     // Main loop
-    while (window.isOpen()) {
+    while (window.isOpen())
+    {
         Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == Event::Closed) {
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::Closed)
+            {
                 window.close();
-            }//
+            }
+            else if (event.type == Event::MouseButtonPressed)
+            {
+                if (event.mouseButton.button == Mouse::Left)
+                {
+                    Vector2i mousePos = Mouse::getPosition(window);
+                    if (switchComponent.isClicked(mousePos))
+                    {
+                        if (switchComponent.circle.getFillColor() == blueColor)
+                        {
+                            switchComponent.circle.setFillColor(greenColor);
+                        }
+                        else
+                        {
+                            switchComponent.circle.setFillColor(blueColor);
+                        }
+                    }
+                }
+            }
         }
 
         // Clear the window with the background color
-        window.clear(bgColour);
+        window.clear(greyColor);
 
-        // Ensure gates contain at least one entry
-        window.draw(andGate.sprite);
-
+        window.draw(switchComponent.circle);
 
         // Display the contents of the window
         window.display();
