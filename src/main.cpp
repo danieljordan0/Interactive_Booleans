@@ -22,7 +22,6 @@ int main()
     SwitchComponent switchComponent("Switch 1", Vector2f(0, 200));
     switchComponent.circle.setFillColor(blueColor);
 
-
     // Main loop
     while (window.isOpen())
     {
@@ -53,12 +52,10 @@ int main()
             }
         }
 
-        // Clear the window with the background color
         window.clear(greyColor);
 
         window.draw(switchComponent.circle);
 
-        // Display the contents of the window
         window.display();
     }
 
