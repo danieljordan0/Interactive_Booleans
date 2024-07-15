@@ -29,7 +29,7 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == Event::Closed) {
                 window.close();
-            }
+            }//
         }
 
         // Clear the window with the background color
