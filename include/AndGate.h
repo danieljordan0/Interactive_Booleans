@@ -7,10 +7,11 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-class AndGate : public Component {
+class AndGate : public Component
+{
 public:
-
-    AndGate() : Component(AND) {} 
+    // 512 x 512
+    AndGate() : Component(AND) {}
 };
 
 #endif // AndGate_H

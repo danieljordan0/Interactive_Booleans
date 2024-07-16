@@ -18,9 +18,13 @@ int main()
     RenderWindow window(sf::VideoMode(1200, 800), "Boolean", Style::Default, settings);
 
     AndGate andGate;
+    andGate.sprite.setScale(0.5, 0.5);
 
-    SwitchComponent switchComponent("Switch 1", Vector2f(0, 200));
-    switchComponent.circle.setFillColor(blueColor);
+    SwitchComponent topSwitch("Switch 1", Vector2f(0, 200));
+    topSwitch.circle.setFillColor(blueColor);
+
+    SwitchComponent bottomSwitch("Switch 1", Vector2f(0, 800 - 250));
+    bottomSwitch.circle.setFillColor(blueColor);
 
     // Main loop
     while (window.isOpen())
@@ -32,29 +36,31 @@ int main()
             {
                 window.close();
             }
-            else if (event.type == Event::MouseButtonPressed)
+            else if (event.type == Event::MouseButtonPressed && event.mouseButton.button == Mouse::Left)
             {
-                if (event.mouseButton.button == Mouse::Left)
+                Vector2i mousePos = Mouse::getPosition(window);
+                SwitchComponent *switches[] = {&topSwitch, &bottomSwitch};
+
+                for (SwitchComponent *sw : switches)
                 {
-                    Vector2i mousePos = Mouse::getPosition(window);
-                    if (switchComponent.isClicked(mousePos))
+                    if (sw->isClicked(mousePos))
                     {
-                        if (switchComponent.circle.getFillColor() == blueColor)
-                        {
-                            switchComponent.circle.setFillColor(greenColor);
-                        }
-                        else
-                        {
-                            switchComponent.circle.setFillColor(blueColor);
-                        }
+                        sw->circle.setFillColor(sw->circle.getFillColor() == blueColor ? greenColor : blueColor);
+                        break;
                     }
+                }
+                if (andGate.IsClicked(mousePos))
+                {
+                    // Add dragging logic
                 }
             }
         }
 
         window.clear(greyColor);
 
-        window.draw(switchComponent.circle);
+        window.draw(topSwitch.circle);
+        window.draw(bottomSwitch.circle);
+        window.draw(andGate.sprite);
 
         window.display();
     }
