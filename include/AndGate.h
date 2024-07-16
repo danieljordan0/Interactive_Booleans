@@ -1,7 +1,6 @@
-#ifndef AndGate_H
-#define AndGate_H
+#ifndef ANDGATE_H
+#define ANDGATE_H
 
-#include <string>
 #include "Component.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -10,8 +9,24 @@
 class AndGate : public Component
 {
 public:
-    // 512 x 512
-    AndGate() : Component(AND) {}
+    AndGate() : Component(AND)
+    {
+        // Load texture specific to AndGate
+        if (!texture.loadFromFile("assets/images/gates/AND_gate.png"))
+        {
+            spdlog::info("Failed to load texture for AndGate");
+        }
+        sprite.setTexture(texture);
+    }
+
+    bool secondInput;
+
+    bool IsClicked(Vector2i point) const override
+    {
+        // Check if the point is within the sprite bounds
+        FloatRect bounds = sprite.getGlobalBounds();
+        return bounds.contains(static_cast<Vector2f>(point));
+    }
 };
 
-#endif // AndGate_H
+#endif // ANDGATE_H

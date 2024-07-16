@@ -11,5 +11,6 @@ Color greenColor(0, 255, 0);
 Color blueColor(0, 0, 255);
 Color redColor(255, 0, 0);
 Color greyColor(128, 128, 128);
+Color yellowColor(255, 255, 204);
 
 #endif
