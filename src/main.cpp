@@ -125,7 +125,7 @@ int main()
         {
             window.draw(bulb->circle);
         }
-        // comments
+        // comments //
 
         // Update FPS
         elapsedTime = clock.getElapsedTime();
